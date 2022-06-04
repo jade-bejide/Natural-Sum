@@ -7,8 +7,11 @@
 #define STDIN 0
 #define STDOUT 1
 
-typedef int fd;
+
 int ok;
+char buffer[100];
+
+typedef int fd;
 typedef fd Pipe[2];
 fd Reader(Pipe p) { return p[0]; }
 fd Writer(Pipe p) { return p[1]; }
@@ -67,8 +70,8 @@ void performParentProcess(char* buffer, Pipe up, Pipe down, int x) {
         if (buffer[bufSize] == '\n') {
             buffer[bufSize] = '\0';
         } else {
-            fprintf(stderr, "no new line from bc\n");
-            exit(1);
+           fprintf(stderr, "no new line from bc\n");
+           exit(1);
         }
 
         sprintf(buffer + bufSize, "+%u\n", i);
@@ -104,7 +107,7 @@ int main(int n, char* argv[]) {
 
     setbuf(stdin, NULL);
     setbuf(stdout, NULL);
-    char buffer[100];
+    
 
     int val = atoi(argv[1]);
 
