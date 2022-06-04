@@ -10,7 +10,8 @@ A concurrent program which calculates the natural sum based on command-line argu
 ## How to Use
 <ol>
 	<li>Compile using make</li> 
-	<li>Run the command <pre>./naturalsum INTEGER</pre></li>
+	<li>Run the command <pre>./naturalsum INTEGER</pre> <span>Where the integer is greater than 3 and less than 4473</li>
+	
 </ol>
 
 ### Notes

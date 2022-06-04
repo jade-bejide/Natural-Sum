@@ -67,7 +67,7 @@ void performParentProcess(char* buffer, Pipe up, Pipe down, int x) {
         if (buffer[bufSize] == '\n') {
             buffer[bufSize] = '\0';
         } else {
-            fprintf(stderr, "no new line from bc");
+            fprintf(stderr, "no new line from bc\n");
             exit(1);
         }
 
@@ -106,8 +106,15 @@ int main(int n, char* argv[]) {
     setbuf(stdout, NULL);
     char buffer[100];
 
+    int val = atoi(argv[1]);
+
+    if (val < 4 || val > 4472) {
+        fprintf(stderr, "Please choose an integer in the valid range 4-4472\n");
+        return 1;
+    }
+    
     naturalSum(buffer, atoi(argv[1]));
-    printf("The result is %s", buffer);
+    printf("The result is %s\n", buffer);
 
     return 0;
 }
