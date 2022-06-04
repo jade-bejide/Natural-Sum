@@ -26,7 +26,6 @@ void check(int ok, char* where) {
 
 int evaluate(char* buffer, int len, fd reader, fd writer) {
   //want to read from stdout and write to stdout
-//   int ok;
 
   int reading = 1, writing = 1;
 
@@ -47,25 +46,21 @@ int evaluate(char* buffer, int len, fd reader, fd writer) {
 }
 
 void createPipes(Pipe up, Pipe down) {
-    // int ok;
     ok = pipe(up); check(ok, "creating up pipe.");
     ok = pipe(down); check(ok, "creating down pipe.");  
 }
 
 void launchChildProcess(Pipe up, Pipe down) {
-    // int ok;
     ok = dup2(Reader(down), STDIN); check(ok, "redirects standard input to the down reader");
     ok = dup2(Writer(up), STDOUT); check(ok, "redirects standard output to the up writer");
     ok = execve(command, argv, envp); check(ok, "exec failure"); //here if ok < 0, then an error has occured and we need to check errno
 }
 
 void performParentProcess(char* buffer, Pipe up, Pipe down, int x) {
-    // int ok;
 
     strcpy(buffer, "1+2\n");
     ok = evaluate(buffer, sizeof(buffer), Reader(up), Writer(down)); check(ok, "evaluating sum.");
 
-    
     for (int i=3; i<=x; i++) {
         int bufSize = strlen(buffer)-1;
 
@@ -82,7 +77,6 @@ void performParentProcess(char* buffer, Pipe up, Pipe down, int x) {
 }
 
 void naturalSum(char* buffer, int x) {
-    // int ok;
     Pipe up;
     Pipe down;
 
